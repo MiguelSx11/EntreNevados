@@ -3,38 +3,32 @@ import { IntlProvider } from 'react-intl'
 import Navbar from '../components/Navbar'
 import './globals.css'
 import { AuthProvider } from '../context/AuthContext'
+import { LocaleProvider, useLocale } from '../context/LocaleContext'
 
-const messages = {
-  es: {
-    home: 'Inicio',
-    categories: 'Categorías',
-    login: 'Ingresar',
-    register: 'Registrarse',
-    logout: 'Cerrar sesión',
-    language: 'Idioma',
-  },
-  en: {
-    home: 'Home',
-    categories: 'Categories',
-    login: 'Login',
-    register: 'Register',
-    logout: 'Logout',
-    language: 'Language',
-  },
+// Wrapper para obtener locale y mensajes
+function IntlWrapper({ children }) {
+  const { locale } = useLocale()
+  const messages = require(`../locales/${locale}/common.json`)
+
+  return (
+    <IntlProvider locale={locale} messages={messages}>
+      {children}
+    </IntlProvider>
+  )
 }
 
 export default function RootLayout({ children }) {
-  const locale = 'es' // Puedes agregar estado e integración para cambiar idioma
-
   return (
-    <html lang={locale}>
+    <html lang="es">
       <body>
-        <IntlProvider locale={locale} messages={messages[locale]}>
+        <LocaleProvider>
           <AuthProvider>
-            <Navbar />
-            {children}
+            <IntlWrapper>
+              <Navbar />
+              {children}
+            </IntlWrapper>
           </AuthProvider>
-        </IntlProvider>
+        </LocaleProvider>
       </body>
     </html>
   )

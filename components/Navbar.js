@@ -1,11 +1,13 @@
 'use client'
 import { useAuth } from '../context/AuthContext'
+import { useLocale } from '../context/LocaleContext'
 import { useRouter } from 'next/navigation'
 import { FormattedMessage } from 'react-intl'
 import { supabase } from '../lib/supabaseClient'
 
 export default function Navbar() {
   const { user, setUser } = useAuth()
+  const { locale, setLocale } = useLocale()
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -20,6 +22,10 @@ export default function Navbar() {
       if (catSection) catSection.scrollIntoView({ behavior: 'smooth' })
       else router.push('/#categorias')
     }
+  }
+
+  const handleChangeLocale = (e) => {
+    setLocale(e.target.value)
   }
 
   return (
@@ -38,6 +44,11 @@ export default function Navbar() {
         >
           <FormattedMessage id="categories" defaultMessage="Categories" />
         </button>
+
+        <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+        </select>
 
         {!user ? (
           <>
