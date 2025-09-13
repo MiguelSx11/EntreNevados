@@ -35,14 +35,14 @@ export default function Navbar() {
         <a href="/" className="hover:text-green-600">
           <FormattedMessage id="home" defaultMessage="Home" />
         </a>
-        <button
-          type="button"
-          className="hover:text-green-600 bg-transparent"
-          style={{ border: 'none', background: 'none', cursor: 'pointer' }}
-          onClick={handleCategoriasClick}
-        >
-          <FormattedMessage id="categories" defaultMessage="Categories" />
-        </button>
+        import Link from 'next/link'
+...
+<button type="button" style={{ border:'none', background:'none', cursor:'pointer' }}>
+  <Link href="/dashboard/sites">
+    <a><FormattedMessage id="categories" defaultMessage="Categories" /></a>
+  </Link>
+</button>
+
 
         <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
           <option value="es">ES</option>
