@@ -37,7 +37,6 @@ export default function Navbar() {
         <a href="/" className="hover:text-green-600">
           <FormattedMessage id="home" defaultMessage="Home" />
         </a>
-        import Link from 'next/link'
 ...
 <button type="button" style={{ border:'none', background:'none', cursor:'pointer' }}>
   <Link href="/dashboard/sites">
