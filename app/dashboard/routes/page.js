@@ -1,13 +1,12 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import { useRouter } from 'next/navigation'
 import RoutePlanner from '../components/RoutePlanner'
 import RouteMapView from '../components/RouteMapView'
-import TranslatorRequestButton from '../../../components/TranslatorRequestButton'
+import TranslatorRequestButton from '../components/TranslatorRequestButton'
 import { supabase } from '../../../lib/supabaseClient'
 
-// Datos ejemplo: ideal obtener en fetch / SSR
 const plans = [
   { id: 1, title: 'Turismo de Aventura', coords: [4.6584, -75.2976] },
   { id: 2, title: 'Turismo de Naturaleza', coords: [4.5, -75.3] },
@@ -30,7 +29,6 @@ export default function RoutesPage() {
     setSaving(true)
 
     try {
-      // Crear ruta
       let { data: route, error } = await supabase
         .from('routes')
         .insert([{ user_id: user.id, name: routeName }])
@@ -39,7 +37,6 @@ export default function RoutesPage() {
 
       if (error) throw error
 
-      // Insertar sitios en ruta con orden
       const insertSites = selectedPlans.map((planId, index) => ({
         route_id: route.id,
         plan_id: planId,
