@@ -1,21 +1,38 @@
 'use client'
 import { useState } from 'react'
-import { NextIntlProvider } from 'next-intl'
+import { IntlProvider } from 'react-intl'
 import Navbar from '../components/Navbar'
-import './globals.css'  // corregido: ruta relativa correcta
+import './globals.css'
+
+const messages = {
+  es: {
+    home: 'Inicio',
+    categories: 'Categorías',
+    login: 'Ingresar',
+    register: 'Registrarse',
+    logout: 'Cerrar sesión',
+    language: 'Idioma',
+  },
+  en: {
+    home: 'Home',
+    categories: 'Categories',
+    login: 'Login',
+    register: 'Register',
+    logout: 'Logout',
+    language: 'Language',
+  },
+}
 
 export default function RootLayout({ children }) {
   const [locale, setLocale] = useState('es')
 
-  const messages = require(`../locales/${locale}/common.json`)
-
   return (
     <html lang={locale}>
       <body>
-        <NextIntlProvider locale={locale} messages={messages}>
+        <IntlProvider locale={locale} messages={messages[locale]}>
           <Navbar locale={locale} setLocale={setLocale} />
           {children}
-        </NextIntlProvider>
+        </IntlProvider>
       </body>
     </html>
   )
