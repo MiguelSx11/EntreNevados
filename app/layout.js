@@ -1,13 +1,12 @@
 'use client'
-import { NextIntlProvider } from 'next-intl'
 import { useState } from 'react'
+import { NextIntlProvider } from 'next-intl/client' // <-- Corrige aquí la ruta
 import Navbar from '../components/Navbar'
-import './globals.css'
+import '../globals.css'
 
 export default function RootLayout({ children }) {
   const [locale, setLocale] = useState('es')
 
-  // Importa las traducciones dinámicamente según el idioma seleccionado
   const messages = require(`../locales/${locale}/common.json`)
 
   return (
