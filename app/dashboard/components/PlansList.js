@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
-import ReviewList from "./ReviewList";
-import ReviewForm from "./ReviewForm";
+import { useRoute } from '../../context/RouteContext'
+import { useRouter } from 'next/navigation'
 
 export default function Plans() {
+  const router = useRouter()
   const plans = [
     {
       id: 1,
@@ -28,43 +28,52 @@ export default function Plans() {
     },
   ];
 
-  const [reviewsVisible, setReviewsVisible] = useState({})
+  const { selectedPlanIds, addPlan, removePlan } = useRoute()
 
-  const toggleReviews = (id) => {
-    setReviewsVisible(prev => ({ ...prev, [id]: !prev[id] }))
+  const togglePlan = (id) => {
+    if (selectedPlanIds.includes(id)) {
+      removePlan(id)
+    } else {
+      addPlan(id)
+    }
   }
 
   return (
-    <div className="space-y-4">
-      {plans.map((p) => (
-        <div key={p.id} className="bg-white rounded-lg shadow overflow-hidden">
-          <img src={p.image} alt={p.title} className="w-full h-40 object-cover" />
-          <div className="p-4">
-            <h3 className="font-bold text-lg">{p.title}</h3>
-            <p className="text-sm text-gray-600">{p.subtitle}</p>
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent("focusOn", { detail: p.coords }))}
-              className="mt-3 w-full bg-amber-400 text-white py-2 rounded hover:bg-amber-500"
-            >
-              Ver en mapa
-            </button>
+    <div>
+      <button
+        onClick={() => router.push('/dashboard/routes')}
+        className="mb-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+      >
+        Ver tus rutas
+      </button>
 
-            <button
-              onClick={() => toggleReviews(p.id)}
-              className="mt-2 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              {reviewsVisible[p.id] ? "Ocultar reseñas" : "Mostrar reseñas"}
-            </button>
+      <div className="space-y-4">
+        {plans.map((p) => {
+          const isSelected = selectedPlanIds.includes(p.id)
+          return (
+            <div key={p.id} className="bg-white rounded-lg shadow overflow-hidden">
+              <img src={p.image} alt={p.title} className="w-full h-40 object-cover" />
+              <div className="p-4">
+                <h3 className="font-bold text-lg">{p.title}</h3>
+                <p className="text-sm text-gray-600">{p.subtitle}</p>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent("focusOn", { detail: p.coords }))}
+                  className="mt-3 w-full bg-amber-400 text-white py-2 rounded hover:bg-amber-500"
+                >
+                  Ver en mapa
+                </button>
 
-            {reviewsVisible[p.id] && (
-              <div className="mt-4 border-t pt-4">
-                <ReviewList planId={p.id} />
-                <ReviewForm planId={p.id} onSuccess={() => { /* refresco si quieres */ }} />
+                <button
+                  onClick={() => togglePlan(p.id)}
+                  className={`mt-2 w-full py-2 rounded text-white ${isSelected ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}`}
+                >
+                  {isSelected ? 'Quitar de la ruta' : 'Añadir a la ruta'}
+                </button>
               </div>
-            )}
-          </div>
-        </div>
-      ))}
+            </div>
+          )
+        })}
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import './globals.css'
 import { AuthProvider } from '../context/AuthContext'
 import { LocaleProvider, useLocale } from '../context/LocaleContext'
+import { RouteProvider } from '../context/RouteContext'  // Importa el nuevo contexto
 
 function IntlWrapper({ children }) {
   const { locale } = useLocale()
@@ -21,10 +22,12 @@ export default function RootLayout({ children }) {
       <body>
         <LocaleProvider>
           <AuthProvider>
-            <IntlWrapper>
-              <Navbar />
-              {children}
-            </IntlWrapper>
+            <RouteProvider> {/* Envuelve aquí el nuevo contexto */}
+              <IntlWrapper>
+                <Navbar />
+                {children}
+              </IntlWrapper>
+            </RouteProvider>
           </AuthProvider>
         </LocaleProvider>
       </body>
