@@ -68,7 +68,6 @@ export default function Dashboard() {
   return (
     <div className="flex h-[calc(100vh-72px)]">
       <aside className="w-1/3 p-6 overflow-y-auto bg-gray-50">
-        <h2 className="text-2xl font-bold mb-4">Bienvenido, {profile?.full_name || user?.email}</h2>
         <p className="text-gray-600 mb-4">Tus Planes</p>
         <Plans />
       </aside>

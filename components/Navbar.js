@@ -26,9 +26,6 @@ export default function Navbar() {
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow">
       <div className="flex items-center space-x-2">
         <img src="/images/entrenevados.png" alt="logo" className="h-12 w-auto" />
-        <span className="text-2xl font-bold text-green-700 select-none">
-          Entre<span className="text-amber-500">Nevados</span>
-        </span>
       </div>
       <div className="flex items-center space-x-4">
         <a href="/" className="hover:text-green-600">
