@@ -1,30 +1,38 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabaseClient'
-import Navbar from '../components/Navbar'
+import { useState } from 'react'
+import { IntlProvider } from 'react-intl'
+//import Navbar from '../components/Navbar'
 import './globals.css'
 
+const messages = {
+  es: {
+    home: 'Inicio',
+    categories: 'Categorías',
+    login: 'Ingresar',
+    register: 'Registrarse',
+    logout: 'Cerrar sesión',
+    language: 'Idioma',
+  },
+  en: {
+    home: 'Home',
+    categories: 'Categories',
+    login: 'Login',
+    register: 'Register',
+    logout: 'Logout',
+    language: 'Language',
+  },
+}
+
 export default function RootLayout({ children }) {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await supabase.auth.getUser()
-      setUser(data.user)
-    }
-    fetchUser()
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-    return () => listener?.subscription.unsubscribe()
-  }, [])
+  const [locale, setLocale] = useState('es')
 
   return (
-    <html lang="es">
+    <html lang={locale}>
       <body>
-        <Navbar user={user} />
-        {children}
+        <IntlProvider locale={locale} messages={messages[locale]}>
+          <Navbar locale={locale} setLocale={setLocale} />
+          {children}
+        </IntlProvider>
       </body>
     </html>
   )
