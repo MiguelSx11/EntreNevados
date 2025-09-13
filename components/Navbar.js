@@ -44,7 +44,7 @@ export default function Navbar() {
           style={{ border: 'none', background: 'none', cursor: 'pointer' }}
           onClick={handleCategoriasClick}
         >
-          <Link href = "/dashboard/sites"><FormattedMessage id="categories" defaultMessage="Categories" /></Link>
+          <Link href = "../dashboard/sites/page.js"><FormattedMessage id="categories" defaultMessage="Categories" /></Link>
         </button>
 
         <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
