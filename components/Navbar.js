@@ -4,6 +4,8 @@ import { useLocale } from '../context/LocaleContext'
 import { useRouter } from 'next/navigation'
 import { FormattedMessage } from 'react-intl'
 import { supabase } from '../lib/supabaseClient'
+import Link from 'next/link'
+
 
 export default function Navbar() {
   const { user, setUser } = useAuth()
