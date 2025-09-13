@@ -5,8 +5,8 @@ export default function RoutePlanner({ plans, onRouteChange }) {
   const [selectedPlans, setSelectedPlans] = useState([])
 
   const togglePlan = (planId) => {
-    setSelectedPlans(prev =>
-      prev.includes(planId) ? prev.filter(id => id !== planId) : [...prev, planId]
+    setSelectedPlans((prev) =>
+      prev.includes(planId) ? prev.filter((id) => id !== planId) : [...prev, planId]
     )
     onRouteChange && onRouteChange(selectedPlans)
   }
@@ -15,7 +15,7 @@ export default function RoutePlanner({ plans, onRouteChange }) {
     <div>
       <h2 className="text-xl font-semibold mb-3">Selecciona los planes para tu ruta</h2>
       <ul className="space-y-2">
-        {plans.map(plan => (
+        {plans.map((plan) => (
           <li key={plan.id}>
             <label className="inline-flex items-center cursor-pointer">
               <input

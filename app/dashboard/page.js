@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { supabase } from "../../lib/supabaseClient"
 import dynamic from "next/dynamic"
 import Plans from "./components/PlansList.js"
-import Filters from "../../components/Filters.jsx" 
+import Filters from "../../components/Filters.jsx"
 
 const MapView = dynamic(() => import("./components/MapView"), { ssr: false })
 

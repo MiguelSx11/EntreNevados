@@ -3,9 +3,11 @@ import { useState } from 'react'
 import { useAuth } from '../../../context/AuthContext'
 import { useRouter } from 'next/navigation'
 import RoutePlanner from '../components/RoutePlanner'
-import RouteMapView from '../components/RouteMapView'
-import TranslatorRequestButton from '../components/TranslatorRequestButton'
+import dynamic from 'next/dynamic'
 import { supabase } from '../../../lib/supabaseClient'
+
+const RouteMapView = dynamic(() => import('../components/RouteMapView'), { ssr: false })
+const TranslatorRequestButton = dynamic(() => import('../components/TranslatorRequestButton'), { ssr: false })
 
 const plans = [
   { id: 1, title: 'Turismo de Aventura', coords: [4.6584, -75.2976] },
@@ -65,6 +67,7 @@ export default function RoutesPage() {
           value={routeName}
           onChange={(e) => setRouteName(e.target.value)}
           className="border p-2 rounded w-full mb-4"
+          disabled={saving}
         />
         <RoutePlanner plans={plans} onRouteChange={setSelectedPlans} />
         <button
