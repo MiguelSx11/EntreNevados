@@ -4,6 +4,7 @@ import { useLocale } from '../context/LocaleContext'
 import { useRouter } from 'next/navigation'
 import { FormattedMessage } from 'react-intl'
 import { supabase } from '../lib/supabaseClient'
+import Link from 'next/link'
 
 export default function Navbar() {
   const { user, setUser } = useAuth()
@@ -43,7 +44,7 @@ export default function Navbar() {
           style={{ border: 'none', background: 'none', cursor: 'pointer' }}
           onClick={handleCategoriasClick}
         >
-          <FormattedMessage id="categories" defaultMessage="Categories" />
+          <Link href = "/dashboard/sites"><FormattedMessage id="categories" defaultMessage="Categories" /></Link>
         </button>
 
         <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
