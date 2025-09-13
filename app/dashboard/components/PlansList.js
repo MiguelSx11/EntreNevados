@@ -1,5 +1,5 @@
 "use client";
-import { useRoute } from '../../context/RouteContext'
+import { useRoute } from '../../../context/RouteContext';
 import { useRouter } from 'next/navigation'
 
 export default function Plans() {
