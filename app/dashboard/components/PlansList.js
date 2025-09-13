@@ -1,5 +1,7 @@
-// app/dashboard/components/Plans.js
 "use client";
+import { useState } from "react";
+import ReviewList from "./ReviewList";
+import ReviewForm from "./ReviewForm";
 
 export default function Plans() {
   const plans = [
@@ -26,6 +28,12 @@ export default function Plans() {
     },
   ];
 
+  const [reviewsVisible, setReviewsVisible] = useState({})
+
+  const toggleReviews = (id) => {
+    setReviewsVisible(prev => ({ ...prev, [id]: !prev[id] }))
+  }
+
   return (
     <div className="space-y-4">
       {plans.map((p) => (
@@ -40,6 +48,20 @@ export default function Plans() {
             >
               Ver en mapa
             </button>
+
+            <button
+              onClick={() => toggleReviews(p.id)}
+              className="mt-2 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            >
+              {reviewsVisible[p.id] ? "Ocultar reseñas" : "Mostrar reseñas"}
+            </button>
+
+            {reviewsVisible[p.id] && (
+              <div className="mt-4 border-t pt-4">
+                <ReviewList planId={p.id} />
+                <ReviewForm planId={p.id} onSuccess={() => { /* refresco si quieres */ }} />
+              </div>
+            )}
           </div>
         </div>
       ))}
