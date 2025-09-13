@@ -38,6 +38,7 @@ export default function Navbar() {
           <FormattedMessage id="home" defaultMessage="Home" />
         </a>
         <button
+          type="button"
           className="hover:text-green-600 bg-transparent"
           style={{ border: 'none', background: 'none', cursor: 'pointer' }}
           onClick={handleCategoriasClick}
@@ -66,6 +67,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-3">
             <span className="text-gray-700">{user.email}</span>
             <button
+              type="button"
               onClick={handleLogout}
               className="px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500"
             >
