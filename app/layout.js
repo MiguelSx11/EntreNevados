@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
-import { NextIntlProvider } from 'next-intl/client' // <-- Corrige aquí la ruta
+import { NextIntlProvider } from 'next-intl'
 import Navbar from '../components/Navbar'
-import '../globals.css'
+import './globals.css'  // corregido: ruta relativa correcta
 
 export default function RootLayout({ children }) {
   const [locale, setLocale] = useState('es')
