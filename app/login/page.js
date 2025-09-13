@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   // Verificar si ya hay sesión activa al cargar la página
   useEffect(() => {
-    const checkSessio = async () => {
+    const checkSession = async () => {
       const { data } = await supabase.auth.getSession()
       if (data.session) {
         router.push("/dashboard")

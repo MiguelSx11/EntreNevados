@@ -1,8 +1,8 @@
 'use client'
-import { useState } from 'react'
 import { IntlProvider } from 'react-intl'
 import Navbar from '../components/Navbar'
 import './globals.css'
+import { AuthProvider } from '../context/AuthContext'
 
 const messages = {
   es: {
@@ -24,14 +24,16 @@ const messages = {
 }
 
 export default function RootLayout({ children }) {
-  const [locale, setLocale] = useState('es')
+  const locale = 'es' // Puedes agregar estado e integración para cambiar idioma
 
   return (
     <html lang={locale}>
       <body>
         <IntlProvider locale={locale} messages={messages[locale]}>
-          <Navbar locale={locale} setLocale={setLocale} />
-          {children}
+          <AuthProvider>
+            <Navbar />
+            {children}
+          </AuthProvider>
         </IntlProvider>
       </body>
     </html>
