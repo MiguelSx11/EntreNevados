@@ -1,10 +1,9 @@
 'use client'
-import { useTranslations } from 'next-intl'
+import { FormattedMessage } from 'react-intl'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabaseClient'
 
 export default function Navbar({ user, locale, setLocale }) {
-  const t = useTranslations()
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -33,13 +32,15 @@ export default function Navbar({ user, locale, setLocale }) {
         </span>
       </div>
       <div className="flex items-center space-x-4">
-        <a href="/" className="hover:text-green-600">{t('home')}</a>
+        <a href="/" className="hover:text-green-600">
+          <FormattedMessage id="home" defaultMessage="Home" />
+        </a>
         <button
           className="hover:text-green-600 bg-transparent"
           style={{ border: 'none', background: 'none', cursor: 'pointer' }}
           onClick={handleCategoriasClick}
         >
-          {t('categories')}
+          <FormattedMessage id="categories" defaultMessage="Categories" />
         </button>
 
         <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
@@ -49,12 +50,14 @@ export default function Navbar({ user, locale, setLocale }) {
 
         {!user ? (
           <>
-            <a href="/login" className="hover:text-green-600">{t('login')}</a>
+            <a href="/login" className="hover:text-green-600">
+              <FormattedMessage id="login" defaultMessage="Login" />
+            </a>
             <a
               href="/login"
               className="px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500"
             >
-              {t('register')}
+              <FormattedMessage id="register" defaultMessage="Register" />
             </a>
           </>
         ) : (
@@ -64,7 +67,7 @@ export default function Navbar({ user, locale, setLocale }) {
               onClick={handleLogout}
               className="px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500"
             >
-              {t('logout')}
+              <FormattedMessage id="logout" defaultMessage="Logout" />
             </button>
           </div>
         )}
