@@ -4,7 +4,6 @@ import { useLocale } from '../context/LocaleContext'
 import { useRouter } from 'next/navigation'
 import { FormattedMessage } from 'react-intl'
 import { supabase } from '../lib/supabaseClient'
-import Link from 'next/link'
 
 export default function Navbar() {
   const { user, setUser } = useAuth()
@@ -25,9 +24,7 @@ export default function Navbar() {
     }
   }
 
-  const handleChangeLocale = (e) => {
-    setLocale(e.target.value)
-  }
+  const handleChangeLocale = (e) => setLocale(e.target.value)
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow">
@@ -44,7 +41,7 @@ export default function Navbar() {
           style={{ border: 'none', background: 'none', cursor: 'pointer' }}
           onClick={handleCategoriasClick}
         >
-          <Link href = "/dashboard/sites"><FormattedMessage id="categories" defaultMessage="Categories" /></Link>
+          <FormattedMessage id="categories" defaultMessage="Categories" />
         </button>
 
         <select value={locale} onChange={handleChangeLocale} className="border p-1 rounded">
@@ -57,10 +54,7 @@ export default function Navbar() {
             <a href="/login" className="hover:text-green-600">
               <FormattedMessage id="login" defaultMessage="Login" />
             </a>
-            <a
-              href="/login"
-              className="px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500"
-            >
+            <a href="/login" className="px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500">
               <FormattedMessage id="register" defaultMessage="Register" />
             </a>
           </>
