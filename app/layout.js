@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { IntlProvider } from 'react-intl'
-//import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar'
 import './globals.css'
 
 const messages = {
